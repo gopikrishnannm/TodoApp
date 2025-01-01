@@ -37,6 +37,37 @@ TodoApp is a full-stack application designed to help users manage their daily ta
      npm start
      ```
    - The frontend will be accessible at `http://localhost:3000`.
+  
+## TodoApp Database Setup
+
+This project contains a MySQL database for the Todo application. The database is named `todoapp` and is accessible at `localhost:3306`. It contains a single table called `Users`, which stores user details.
+
+### Database Details
+
+- **Database Name**: `todoapp`
+- **Port**: `3306` (Default MySQL port)
+- **Table Name**: `Users`
+
+### Table Structure
+
+The `Users` table has the following structure:
+
+| Column Name | Data Type         | Constraints            |                 
+|-------------|-------------------|------------------------|
+| `id`        | `INT`             | `PRIMARY KEY`, `AUTO_INCREMENT` |
+| `userName`  | `VARCHAR(255)`     | `NOT NULL`             |
+| `password`  | `VARCHAR(255)`     | `NOT NULL`             |
+
+### SQL Command to Create Table:
+
+```sql
+CREATE TABLE Users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    userName VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+```
+
      
   
 
