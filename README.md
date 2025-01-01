@@ -38,17 +38,17 @@ TodoApp is a full-stack application designed to help users manage their daily ta
      ```
    - The frontend will be accessible at `http://localhost:3000`.
   
-# TodoApp Database Setup
+## TodoApp Database Setup
 
 This project contains a MySQL database for the Todo application. The database is named `todoapp` and is accessible at `localhost:3306`. It contains a single table called `Users`, which stores user details.
 
-## Database Details
+### Database Details
 
 - **Database Name**: `todoapp`
 - **Port**: `3306` (Default MySQL port)
 - **Table Name**: `Users`
 
-## Table Structure
+### Table Structure
 
 The `Users` table has the following structure:
 
