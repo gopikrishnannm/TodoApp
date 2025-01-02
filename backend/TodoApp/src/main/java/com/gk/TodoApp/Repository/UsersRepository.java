@@ -8,9 +8,7 @@ import com.gk.TodoApp.Model.User;
 
 @Repository
 public interface UsersRepository extends JpaRepository<User, Integer>{
-
-    User findByUsername(String username);
-
     
+    User findByUsername(String username);
 
 }

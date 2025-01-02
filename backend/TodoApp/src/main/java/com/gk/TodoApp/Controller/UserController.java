@@ -23,6 +23,13 @@ public class UserController {
         return services.register(user);
     }
 
+    @PostMapping("/login")
+    public String login(@RequestBody User user){
+
+        // returning jwt token
+        return services.verify(user);
+    }
+
     @GetMapping("users")
     public List<User> listusers(){
         return services.returnUsers();
