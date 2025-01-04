@@ -34,9 +34,4 @@ public class UserController {
     public List<User> listusers(){
         return services.returnUsers();
     }
-
-
-
-    
-
 }

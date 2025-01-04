@@ -1,9 +1,13 @@
 package com.gk.TodoApp.Model;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -16,7 +20,13 @@ public class User {
     private int id;
 
     private String username;
+
     private String password;
+
+
+    public User(){
+
+    }
 
 
     public int getId() {
@@ -41,6 +51,10 @@ public class User {
     public String toString() {
         return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
     }
+
+    @OneToMany(mappedBy="user", cascade = CascadeType.ALL, orphanRemoval=true)
+    private List<Todo> todos;
+
 
     
 
