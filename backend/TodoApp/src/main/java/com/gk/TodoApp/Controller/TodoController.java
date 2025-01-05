@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,9 +33,14 @@ public class TodoController {
     }
 
     @DeleteMapping("/users/{userid}/todos/{todoid}")
-    public ResponseEntity<Void> deleteTodo(@PathVariable int userid, @PathVariable int todoid){
+    public ResponseEntity<?> deleteTodo(@PathVariable int userid, @PathVariable int todoid){
        return todoServices.deleteTodoForUser(userid, todoid);
 
     }
+    @PutMapping("/users/{userid}/todos/{todoid}")
+    public ResponseEntity<Todo> updateTodo(@PathVariable int userid, @PathVariable int todoid, @RequestBody Todo todo){
+        return todoServices.updateTodo(userid, todoid, todo);
+    }
+
 
 }

@@ -59,6 +59,10 @@ public class Todo {
     public void setTargetdate(LocalDate targetdate) {
         this.targetdate = targetdate;
     }
+    
+    public boolean getDone(){
+        return done;
+    }
 
     public void setDone(boolean done) {
         this.done = done;
