@@ -68,6 +68,28 @@ CREATE TABLE Users (
 );
 ```
 
+The `Todos` table has the following structure:
+
+| Column Name   | Data Type      | Constraints                                                        |
+|---------------|----------------|--------------------------------------------------------------------|
+| `id`          | `INT`          | `PRIMARY KEY`, `AUTO_INCREMENT`                                    |
+| `description` | `VARCHAR(255)` | `NOT NULL`                                                         |
+| `targetdate`  | `DATE`         | `NOT NULL`                                                         |
+| `done`        | `BOOLEAN`      | `NOT NULL`, `DEFAULT FALSE`                                        |
+| `user_id`     | `INT`          | `NOT NULL`, `FOREIGN KEY` (references `user(id)` with `ON DELETE CASCADE`) |
+
+### SQL Command to Create Table:
+
+```sql
+CREATE TABLE Todos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(255) NOT NULL,
+    targetdate DATE NOT NULL,
+    done BOOLEAN NOT NULL DEFAULT FALSE,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
+);
+```
      
   
 
