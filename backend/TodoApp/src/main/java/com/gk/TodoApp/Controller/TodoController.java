@@ -27,7 +27,7 @@ public class TodoController {
          return todoServices.saveTodoForUser(id, todo);
     }
 
-    @GetMapping("/users/{id}/getTodos")
+    @GetMapping("/users/{id}/todos")
     public List<Todo> retrieveTodo(@PathVariable int id){
         return todoServices.retrieveTodoForUser(id);
     }

@@ -3,12 +3,15 @@ package com.gk.TodoApp.Services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.gk.TodoApp.Config.JwtAuthenticationResponse;
 import com.gk.TodoApp.Model.User;
 import com.gk.TodoApp.Repository.UsersRepository;
 import com.gk.TodoApp.SecurityServices.JWTService;
@@ -39,7 +42,7 @@ public class UserServices {
         return usersRepository.findAll();
     }
 
-    public String verify(User user) {
+    public ResponseEntity<?> verify(User user) {
         
         // creating a authenticaion object and making it authenticated by checking it with 
         // UsernamePasswordAuthenticationToken that is delegating the task to authentication provider(dao)
@@ -49,9 +52,9 @@ public class UserServices {
         // 
         if(authentication.isAuthenticated()){
             // if authentication object is authenticated then generate jwt token
-            return jwtService.generateToken(user.getUsername());
+            String jwt = jwtService.generateToken(user.getUsername());
+            return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, user.getUsername()));
         }
-        return "fail";
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticaion failed"); 
     }
-
 }
