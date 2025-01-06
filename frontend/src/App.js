@@ -1,25 +1,9 @@
-import LoginComponent from "./Comonents/LoginComponent";
-import {BrowserRouter, Route, Router, Routes} from 'react-router-dom';
-import WelcomeComponent from "./Comonents/WelcomeComponent";
+import TodoApp from "./Comonents/TodoApp";
 
 function App() {
   return (
-    <div className="App">
-        <BrowserRouter>
-          <Routes>
-
-            <Route path="/" element={<LoginComponent/>}/>
-            <Route path="/welcome" element={WelcomeComponent}/>
-            
-
-
-
-          </Routes>
-        
-        </BrowserRouter>
-        
-    </div>
-  );
+    <TodoApp/>
+  )
 }
 
 export default App;

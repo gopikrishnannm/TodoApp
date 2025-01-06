@@ -1,4 +1,5 @@
 import { useState } from "react"
+import {useNavigate} from 'react-router-dom'
 
 export default function LoginComponent(){
 
@@ -7,11 +8,12 @@ export default function LoginComponent(){
 
     const [errorMessage, setErrorMessage] = useState(false);
 
+    const navigate = useNavigate();
     
 
-    function verifyCredenials(username, password){
-        if(username == 'gk' && password == 'gk'){
-            
+    function verifyCredenials(){
+        if(username === 'gk' && password === 'gk'){
+            navigate('/welcome')
         }
         else{
             setErrorMessage(true);
