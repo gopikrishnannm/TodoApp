@@ -1,24 +1,30 @@
 import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
+import { useAuth } from "../BasicComponents/AuthProvider"
+
+// import verifyCredenials from '../BasicComponents/SecurityComponent'
+
 
 export default function LoginComponent(){
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
-
     const [errorMessage, setErrorMessage] = useState(false);
-
     const navigate = useNavigate();
-    
+
+    const authContext = useAuth();  
 
     function verifyCredenials(){
-        if(username === 'gk' && password === 'gk'){
+        if(authContext.login(username, password)){
             navigate('/welcome')
+
         }
+
         else{
-            setErrorMessage(true);
+            setErrorMessage(true)
         }
     }
+
 
 
     return(
