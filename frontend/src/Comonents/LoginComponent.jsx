@@ -12,12 +12,14 @@ export default function LoginComponent(){
     const [errorMessage, setErrorMessage] = useState(false);
     const navigate = useNavigate();
 
-    const authContext = useAuth();  
+    const authContext = useAuth();
+     
+    
+    
 
     function verifyCredenials(){
         if(authContext.login(username, password)){
-            navigate('/welcome')
-
+            navigate(`/welcome/${username}`)
         }
 
         else{

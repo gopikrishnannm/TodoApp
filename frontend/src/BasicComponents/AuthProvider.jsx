@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
+import {loginUser} from './Api'
 
 export const AuthContext = createContext()
 
@@ -12,20 +13,34 @@ export default function AuthProvider({children}){
 
 
     function login(username, password){
-        if(username === 'gk' && password === 'gk'){
-            setAuthenticated(true)
-            return true
+
+
+        try{
+            const data = loginUser(username,password)
+            
+            if(data){
+                const {token} = data
+                localStorage.setItem("token", token)
+                setAuthenticated(true)
+                return true
+            }
+            else{
+                setAuthenticated(false)
+                return false
+            }
         }
 
-        else{
-            setAuthenticated(false)
-            return false
+        catch(error){
+            console.error('Login failed:', error.response || error.message);
+            setAuthenticated(false);
+            return false;            
         }
     }
 
 
     function logout(){
-        setAuthenticated(false)
+        localStorage.removeItem('token');
+        setAuthenticated(false);
     }
 
 

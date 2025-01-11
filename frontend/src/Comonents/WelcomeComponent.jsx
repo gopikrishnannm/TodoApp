@@ -1,13 +1,25 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 
 export default function WelcomeComponent(){
+
+    const {username} = useParams()
+
     return(
 
-        <Link to='/todo'>
+        <div>
 
-            <button> Goto Todo management</button>
+            <div>Welcome {username}</div>
 
-        </Link>
+            <Link to='/todo'>
+
+
+
+                <button> Goto Todo management</button>
+
+            </Link>
+        </div>
+
+        
 
     )
 }

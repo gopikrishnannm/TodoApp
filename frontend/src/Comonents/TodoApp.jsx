@@ -10,7 +10,7 @@ import AuthProvider, { useAuth } from "../BasicComponents/AuthProvider";
 function AuthenticatedRoute({children}){
     
     const authContext = useAuth()
-    if(authContext.isauthenticated){
+    if(authContext.authenticated){
         return children
     }
     return <Navigate to = "/"/>
@@ -29,7 +29,7 @@ export default function TodoApp(){
             <Routes>
 
                 <Route path="/" element={<LoginComponent/>}/>
-                <Route path="/welcome" element={
+                <Route path="/welcome/:username" element={
                     
                     <AuthenticatedRoute>
                         <WelcomeComponent/>

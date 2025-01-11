@@ -1,51 +1,76 @@
+import { useState } from "react"
+import {retrieveAllTodoForUser} from '../BasicComponents/Api'
+
+
+
 export default function TodoComponent(){
 
-    const todos = [
-        {   
-            id : "1",
-            description : "abc",
-            targetDate : "2024-12-2",
-            done : "false"
-        },
-        {
-            id : "2",
-            description : "abc",
-            targetDate : "2024-12-2",
-            done : "false"
-        }
+    // const todosa = [
+    //     {   
+    //         id : "1",
+    //         description : "abc",
+    //         targetDate : "2024-12-2",
+    //         done : "false"
+    //     },
+    //     {
+    //         id : "2",
+    //         description : "abc",
+    //         targetDate : "2024-12-2",
+    //         done : "false"
+    //     }
         
 
-    ]
+    // ]
 
-    return(
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        ID
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-            {   
-            todos.map(
+    const [todos, setTodos] = useState()
 
-                todo => (
-                    <tr>
-                        <td>{todo.id}</td>
-                    </tr>
-                    
-                )
+    retrieveAllTodoForUser(1)
+    .then((response)=>console.log(response))
+    .catch((error)=> console.log(error))
 
-            )
-        }
+    
 
-            </tbody>
+    // return(
+    //     <table>
+    //         <thead>
+    //             <tr>
+    //                 <th>
+    //                     ID
+    //                 </th>
+    //                 <th>
+    //                     Description
+    //                 </th>
+    //                 <th>
+    //                     Done
+    //                 </th>
+    //                 <th>
+    //                     TargetDate
+    //                 </th>
+    //             </tr>
+    //         </thead>
+    //         <tbody>
+    //         {   
+    //         todosa.map(
+
+    //                 todo => (
+    //                     <tr>
+    //                         <td>{todo.id}</td>
+    //                         <td>{todo.description}</td>
+    //                         <td>{todo.targetDate}</td>
+    //                         <td>{todo.done}</td>
+    //                     </tr>
+                        
+    //                 )
+
+    //             )
+    //         }
+
+    //         </tbody>
             
 
-        </table>
+    //     </table>
         
 
 
-    )
+    // )
 }
