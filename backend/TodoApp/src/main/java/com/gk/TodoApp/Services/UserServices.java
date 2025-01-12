@@ -53,6 +53,7 @@ public class UserServices {
         if(authentication.isAuthenticated()){
             // if authentication object is authenticated then generate jwt token
             String jwt = jwtService.generateToken(user.getUsername());
+            
             return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, user.getUsername()));
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticaion failed"); 

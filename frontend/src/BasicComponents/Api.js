@@ -1,32 +1,19 @@
 import axios from 'axios'
 
-const apiClient = axios.create(
-    {
-        baseURL : 'http://localhost:8080'
-    }
+const token = localStorage.getItem("token")
 
-)
 
-// export function retrieveAllTodoForUser(id){
-//     apiClient.get(`/users/${id}/todos`)
-// }
+const apiClientWithAuth = axios.create({
+    baseURL: 'http://localhost:8080', // Your backend URL
+    headers: {
+        'Content-Type': 'application/json',
+        Authorization: token ? `Bearer ${token}` : '', // Add token if it exists
+    },
+})
 
-///http://localhost:8080/users/1/todos
+///users/{id}/todos
 export const retrieveAllTodoForUser
-    = (userid) => apiClient.get(`/users/${userid}/todos`)
+    = (id) => apiClientWithAuth.get(`/users/${id}/todos`) 
 
 
-
-export const loginUser = async (username, password) => {
-
-    const user = {username,password}
-    try{ 
-        const response = await apiClient.post('/login', user);
-        return response.data.jwt; // token and username
-    }catch(error){
-
-        throw error;
-    }
-
-
-};
+export default  apiClientWithAuth

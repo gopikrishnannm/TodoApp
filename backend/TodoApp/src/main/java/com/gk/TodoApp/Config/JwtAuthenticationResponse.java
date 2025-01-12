@@ -5,6 +5,7 @@ public class JwtAuthenticationResponse {
     private String jwt; 
     private String username; 
 
+
    
     public JwtAuthenticationResponse(String jwt, String username) {
         this.jwt = jwt;
@@ -28,5 +29,7 @@ public class JwtAuthenticationResponse {
     public void setUsername(String username) {
         this.username = username;
     }
+
+
     
 }

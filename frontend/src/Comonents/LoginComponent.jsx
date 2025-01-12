@@ -2,7 +2,7 @@ import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
 import { useAuth } from "../BasicComponents/AuthProvider"
 
-// import verifyCredenials from '../BasicComponents/SecurityComponent'
+
 
 
 export default function LoginComponent(){
@@ -17,8 +17,10 @@ export default function LoginComponent(){
     
     
 
-    function verifyCredenials(){
-        if(authContext.login(username, password)){
+    async function verifyCredenials(){
+
+        const isAuthenticated = await authContext.login(username, password)
+        if(isAuthenticated){
             navigate(`/welcome/${username}`)
         }
 

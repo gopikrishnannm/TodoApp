@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
-import {loginUser} from './Api'
+import {loginUser} from './Apiforlogin'
 
 export const AuthContext = createContext()
 
@@ -12,14 +12,15 @@ export default function AuthProvider({children}){
     const [authenticated, setAuthenticated] = useState(false);
 
 
-    function login(username, password){
+    async function login(username, password){
 
 
         try{
-            const data = loginUser(username,password)
+            const response = await loginUser(username,password)
             
-            if(data){
-                const {token} = data
+            if(response){
+                const { jwt : token, username } = response.data; 
+                console.log("Token recieved",token)
                 localStorage.setItem("token", token)
                 setAuthenticated(true)
                 return true
