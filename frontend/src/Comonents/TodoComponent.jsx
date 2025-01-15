@@ -1,77 +1,77 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {retrieveAllTodoForUser} from '../BasicComponents/Api'
+import { useParams } from "react-router-dom"
+import { useAuth } from "../BasicComponents/AuthProvider"
 
 
 
+ 
 
-export default function TodoComponent(){
 
-    // const todosa = [
-    //     {   
-    //         id : "1",
-    //         description : "abc",
-    //         targetDate : "2024-12-2",
-    //         done : "false"
-    //     },
-    //     {
-    //         id : "2",
-    //         description : "abc",
-    //         targetDate : "2024-12-2",
-    //         done : "false"
-    //     }
-        
 
-    // ]
+export default async function TodoComponent(){
 
-    const [todos, setTodos] = useState()
+    const {username} = useParams()
 
-    retrieveAllTodoForUser(1)
-    .then((response)=>console.log(response))
-    .catch((error)=> console.log(error))
+    const [userid, setUserid] = useState(null)
+    
+    const auth = useAuth()
+
+    userid = await auth.getUserid(username)
+
+    console.log(userid)
+
+    const [todos, setTodos] = useState([])
+
+
+
+    useEffect(()=> {
+        retrieveAllTodoForUser(userid)
+    .then((response)=>setTodos(response.data))
+    .catch((error)=> console.log(error.message))
+    },[]
+    )
 
     
 
-    // return(
-    //     <table>
-    //         <thead>
-    //             <tr>
-    //                 <th>
-    //                     ID
-    //                 </th>
-    //                 <th>
-    //                     Description
-    //                 </th>
-    //                 <th>
-    //                     Done
-    //                 </th>
-    //                 <th>
-    //                     TargetDate
-    //                 </th>
-    //             </tr>
-    //         </thead>
-    //         <tbody>
-    //         {   
-    //         todosa.map(
+    
 
-    //                 todo => (
-    //                     <tr>
-    //                         <td>{todo.id}</td>
-    //                         <td>{todo.description}</td>
-    //                         <td>{todo.targetDate}</td>
-    //                         <td>{todo.done}</td>
-    //                     </tr>
+    return(
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        Done
+                    </th>
+                    <th>
+                        TargetDate
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+            {   
+            todos.map(  todo => 
+                    (
+                        <tr key={todo.id}>
+                            <td>{todo.description}</td>
+                            <td>{todo.targetdate}</td>
+                            <td>{todo.done == 1 ? "yes" : "No"}</td>
+                        </tr>
                         
-    //                 )
+                    )
 
-    //             )
-    //         }
+                )
+            }
 
-    //         </tbody>
+            </tbody>
             
 
-    //     </table>
+        </table>
         
 
 
-    // )
+    )
 }

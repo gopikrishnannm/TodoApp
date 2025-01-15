@@ -1,6 +1,7 @@
 import { createContext, useContext } from "react";
 import { useState } from "react";
 import {loginUser} from './Apiforlogin'
+import {retrieveIdByUsername} from '../BasicComponents/Api'
 
 export const AuthContext = createContext()
 
@@ -11,8 +12,10 @@ export default function AuthProvider({children}){
 
     const [authenticated, setAuthenticated] = useState(false);
 
+    // const [userid, setUserid] = useState(10)
 
-    async function login(username, password){
+
+    async function login(username, password){   
 
 
         try{
@@ -44,10 +47,15 @@ export default function AuthProvider({children}){
         setAuthenticated(false);
     }
 
+    async function getUserid(username){
+            const userid = await retrieveIdByUsername(username)
+            return userid
+     }
+
 
     return(
 
-        <AuthContext.Provider value={{authenticated, setAuthenticated, login, logout}}>
+        <AuthContext.Provider value={{authenticated, setAuthenticated, login, logout,getUserid}}>
             {children}
         </AuthContext.Provider>
 

@@ -10,7 +10,7 @@ export default function WelcomeComponent(){
 
             <div>Welcome {username}</div>
 
-            <Link to='/todo'>
+            <Link to={`/${username}/todo`}>
 
 
 

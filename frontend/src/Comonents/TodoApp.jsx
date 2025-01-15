@@ -38,7 +38,7 @@ export default function TodoApp(){
                     
                     
                     }/>
-                <Route path="/todo" element={
+                <Route path="/:username/todo" element={
                     <AuthenticatedRoute>
                         <TodoComponent/>
                     </AuthenticatedRoute>

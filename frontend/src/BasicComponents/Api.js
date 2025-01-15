@@ -3,17 +3,42 @@ import axios from 'axios'
 const token = localStorage.getItem("token")
 
 
+// const apiClientWithAuth = axios.create({
+//     baseURL: 'http://localhost:8080', // Your backend URL
+//     headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: token ? `Bearer ${token}` : '', // Add token if it exists
+//     },
+// })
+
 const apiClientWithAuth = axios.create({
     baseURL: 'http://localhost:8080', // Your backend URL
     headers: {
         'Content-Type': 'application/json',
-        Authorization: token ? `Bearer ${token}` : '', // Add token if it exists
     },
-})
+});
+
+apiClientWithAuth.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('token'); // Fetch the latest token from localStorage
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+export const retrieveIdByUsername 
+    = (username) => apiClientWithAuth.get(`/getuserid/${username}`)
 
 ///users/{id}/todos
 export const retrieveAllTodoForUser
     = (id) => apiClientWithAuth.get(`/users/${id}/todos`) 
+
+
 
 
 export default  apiClientWithAuth

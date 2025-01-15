@@ -10,5 +10,6 @@ import com.gk.TodoApp.Model.User;
 public interface UsersRepository extends JpaRepository<User, Integer>{
     
     User findByUsername(String username);
+    //Optional<Integer> findIdByUsername(String username);
 
 }

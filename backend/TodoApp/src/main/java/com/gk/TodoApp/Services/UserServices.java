@@ -32,6 +32,16 @@ public class UserServices {
 
     BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder(12);
 
+    public int findUserById(String username){
+        User user = usersRepository.findByUsername(username);
+        if (user == null) {
+            throw new RuntimeException("User Not Found");
+        }
+        
+        return user.getId();
+
+    }
+
     public User register(User user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));
