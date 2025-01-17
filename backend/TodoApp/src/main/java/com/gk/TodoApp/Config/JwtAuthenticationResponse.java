@@ -3,12 +3,14 @@ package com.gk.TodoApp.Config;
 public class JwtAuthenticationResponse {
 
     private String jwt; 
-    private String username; 
+    private String username;
+    private int id; 
 
 
    
-    public JwtAuthenticationResponse(String jwt, String username) {
+    public JwtAuthenticationResponse(String jwt,int id,  String username) {
         this.jwt = jwt;
+        this.id = id;
         this.username = username;
     }
 
@@ -21,6 +23,13 @@ public class JwtAuthenticationResponse {
         this.jwt = jwt;
     }
 
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
+    
    
     public String getUsername() {
         return username;
@@ -29,6 +38,7 @@ public class JwtAuthenticationResponse {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
 
     

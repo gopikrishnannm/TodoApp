@@ -37,10 +37,12 @@ export default function TodoComponent(){
     //     fetchUserAndTodos();
     // }, [username, auth]); // Dependencies
 
-
+    
 
     useEffect(()=> {
-        retrieveAllTodoForUser(1)
+        const userid = localStorage.getItem("userid")
+        console.log("user id from todo component ", userid)
+        retrieveAllTodoForUser(userid)
     .then((response)=>setTodos(response.data))
     .catch((error)=> console.log(error.message))
     },[]

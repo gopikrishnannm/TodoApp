@@ -32,12 +32,14 @@ apiClientWithAuth.interceptors.request.use(
     }
 );
 
+export const retrieveAllTodoForUser
+    = (id) => apiClientWithAuth.get(`/users/${id}/todos`) 
+
+
 export const retrieveIdByUsername 
     = (username) => apiClientWithAuth.get(`/getuserid/${username}`)
 
 ///users/{id}/todos
-export const retrieveAllTodoForUser
-    = (id) => apiClientWithAuth.get(`/users/${id}/todos`) 
 
 
 

@@ -22,9 +22,11 @@ export default function AuthProvider({children}){
             const response = await loginUser(username,password)
             
             if(response){
-                const { jwt : token, username } = response.data; 
+                const { jwt : token, id : userid, username } = response.data; 
                 console.log("Token recieved",token)
                 localStorage.setItem("token", token)
+                localStorage.setItem("userid", userid)
+                console.log("user id in set item is ", userid)
                 setAuthenticated(true)
                 return true
             }
@@ -47,15 +49,15 @@ export default function AuthProvider({children}){
         setAuthenticated(false);
     }
 
-    async function getUserid(username){
-            const userid = await retrieveIdByUsername(username)
-            return userid
-     }
+    // async function getUserid(username){
+    //         const userid = await retrieveIdByUsername(username)
+    //         return userid
+    //  }
 
 
     return(
 
-        <AuthContext.Provider value={{authenticated, setAuthenticated, login, logout,getUserid}}>
+        <AuthContext.Provider value={{authenticated, setAuthenticated, login, logout}}>
             {children}
         </AuthContext.Provider>
 

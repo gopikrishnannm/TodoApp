@@ -62,9 +62,15 @@ public class UserServices {
         // 
         if(authentication.isAuthenticated()){
             // if authentication object is authenticated then generate jwt token
-            String jwt = jwtService.generateToken(user.getUsername());
-            
-            return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, user.getUsername()));
+            User fullUserDetails = usersRepository.findByUsername(user.getUsername());
+    
+    // Check if user exists and get the user ID
+    if (fullUserDetails != null) {
+        String jwt = jwtService.generateToken(user.getUsername());
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, fullUserDetails.getId(), user.getUsername()));
+    } else {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+    }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticaion failed"); 
     }
