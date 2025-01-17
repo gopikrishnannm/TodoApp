@@ -21,6 +21,7 @@ const apiClientWithAuth = axios.create({
 apiClientWithAuth.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem('token'); // Fetch the latest token from localStorage
+        console.log('Token being sent:', token); // Add this line for debugging
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }

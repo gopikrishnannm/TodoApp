@@ -9,7 +9,7 @@ import { useAuth } from "../BasicComponents/AuthProvider"
 
 
 
-export default async function TodoComponent(){
+export default function TodoComponent(){
 
     const {username} = useParams()
 
@@ -17,16 +17,30 @@ export default async function TodoComponent(){
     
     const auth = useAuth()
 
-    userid = await auth.getUserid(username)
+    //userid = await auth.getUserid(username)
 
-    console.log(userid)
+    //console.log(userid)
 
     const [todos, setTodos] = useState([])
+
+    // useEffect(() => {
+    //     const fetchUserAndTodos = async () => {
+    //         try {
+    //             const userIdResponse = await auth.getUserid(username);
+    //             setUserid(userIdResponse.data); // Correctly set the state
+    //             const todosResponse = await retrieveAllTodoForUser(userIdResponse.data);
+    //             setTodos(todosResponse.data);
+    //         } catch (error) {
+    //             console.error('Error fetching todos:', error.message);
+    //         }
+    //     };
+    //     fetchUserAndTodos();
+    // }, [username, auth]); // Dependencies
 
 
 
     useEffect(()=> {
-        retrieveAllTodoForUser(userid)
+        retrieveAllTodoForUser(1)
     .then((response)=>setTodos(response.data))
     .catch((error)=> console.log(error.message))
     },[]
