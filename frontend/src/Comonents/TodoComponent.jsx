@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import {retrieveAllTodoForUser} from '../BasicComponents/Api'
+import {retrieveAllTodoForUser, deleteTodoForUser} from '../BasicComponents/Api'
 import { useParams } from "react-router-dom"
 import { useAuth } from "../BasicComponents/AuthProvider"
 
@@ -14,6 +14,8 @@ export default function TodoComponent(){
     const {username} = useParams()
 
     const [userid, setUserid] = useState(null)
+
+    const [errorMessage, setErrorMessage] = useState(false)
     
     const auth = useAuth()
 
@@ -37,22 +39,44 @@ export default function TodoComponent(){
     //     fetchUserAndTodos();
     // }, [username, auth]); // Dependencies
 
+
+
     
 
-    useEffect(()=> {
+    useEffect(()=> retrieveAllTodos,[])
+
+    function retrieveAllTodos(){
         const userid = localStorage.getItem("userid")
         console.log("user id from todo component ", userid)
         retrieveAllTodoForUser(userid)
-    .then((response)=>setTodos(response.data))
+        .then((response)=>setTodos(response.data))
     .catch((error)=> console.log(error.message))
-    },[]
-    )
+    }
 
+
+    function deleteTodo(todoid){
+        const userid = localStorage.getItem("userid")
+        console.log("user id for delete todo is " , userid)
+        console.log("deleting todo id ". todoid)
+        deleteTodoForUser(userid, todoid)
+        .then((respone)=> {
+
+            //console.log(respone)
+            setErrorMessage(true)
+            retrieveAllTodos()
+
+        })
+        .catch((error)=> console.log(error))
+
+    }
     
 
     
 
     return(
+        <div>
+
+            {errorMessage && <div>Todo item has been deleted</div>}
         <table>
             <thead>
                 <tr>
@@ -60,10 +84,11 @@ export default function TodoComponent(){
                         Description
                     </th>
                     <th>
-                        Done
+                        TargetDate
+                        
                     </th>
                     <th>
-                        TargetDate
+                        Done
                     </th>
                 </tr>
             </thead>
@@ -75,6 +100,7 @@ export default function TodoComponent(){
                             <td>{todo.description}</td>
                             <td>{todo.targetdate}</td>
                             <td>{todo.done == 1 ? "yes" : "No"}</td>
+                            <td><button onClick={()=>deleteTodo(todo.id)}>Delete todo</button></td>
                         </tr>
                         
                     )
@@ -86,6 +112,9 @@ export default function TodoComponent(){
             
 
         </table>
+
+        </div>
+        
         
 
 

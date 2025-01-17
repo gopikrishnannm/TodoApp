@@ -39,6 +39,10 @@ export const retrieveAllTodoForUser
 export const retrieveIdByUsername 
     = (username) => apiClientWithAuth.get(`/getuserid/${username}`)
 
+
+export const deleteTodoForUser 
+    = (userid, todoid) => apiClientWithAuth.delete(`/users/${userid}/todos/${todoid}`) 
+
 ///users/{id}/todos
 
 
