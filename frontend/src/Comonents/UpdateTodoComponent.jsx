@@ -15,6 +15,7 @@ export default function UpdateTodoComponent(){
 
     const [description, setDescription] = useState('')
     const [targetdate, setTargetDate] = useState('')
+    const [done, setdone] = useState(false)
 
 
     const [updateSuccessMessage, setUpdateSuccessMessage] = useState(false)
@@ -34,6 +35,7 @@ export default function UpdateTodoComponent(){
                 {
                     setDescription(response.data.description)
                     setTargetDate(response.data.targetdate)
+                    setdone(response.data.done)
                     
                 }
         )
@@ -42,10 +44,11 @@ export default function UpdateTodoComponent(){
 
     function onSubmit(values){
         const userid = localStorage.getItem("userid")
+        console.log("value  of is done is ", values.done)
         const todo = {
             "description" : values.description,
             "targetdate" : values.targetdate,
-            "done" : false
+            "done" : values.done === "true"
         }
 
         if(todoid!=-1){
@@ -95,7 +98,7 @@ export default function UpdateTodoComponent(){
         <div>
             {updateSuccessMessage && <div>Todo has been updated</div>}
             {newTodoSuccessMessage && <div>New Todo has been created</div>}
-            <Formik initialValues={{description, targetdate}}
+            <Formik initialValues={{description, targetdate, done}}
                 enableReinitialize = {true}
                 onSubmit={onSubmit}
                 validate={validate}
@@ -126,6 +129,13 @@ export default function UpdateTodoComponent(){
                             <fieldset>
                                 <label>TargetDate</label>
                                 <Field type="date" name="targetdate"/>
+                            </fieldset>
+                            <fieldset>
+                                <label>Done?</label>
+                                <Field as="select" name="done">
+                                    <option value="true">Yes</option>
+                                    <option value="false">No</option>
+                                </Field>
                             </fieldset>
                             <div>
                                 <button type="submit">Save</button>
