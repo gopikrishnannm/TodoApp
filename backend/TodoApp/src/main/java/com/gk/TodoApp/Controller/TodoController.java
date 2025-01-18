@@ -44,5 +44,10 @@ public class TodoController {
         return todoServices.updateTodo(userid, todoid, todo);
     }
 
+    @GetMapping("/users/{userid}/todos/{todoid}")
+    public ResponseEntity<Todo> RetrieveSingleTodo(@PathVariable int userid, @PathVariable int todoid){
+        return todoServices.RetrieveSpecificTodo(userid, todoid);
+    }
+
 
 }

@@ -58,6 +58,17 @@ public class TodoServices {
         return ResponseEntity.noContent().build();
     }
 
+    public ResponseEntity<Todo> RetrieveSpecificTodo(int userid, int todoid){
+        User user = usersRepository.findById(userid)
+        .orElseThrow(() -> new RuntimeException("User Not Found"));
+
+        Todo exisitingTodo = todoRepository.findByUserAndId(user, todoid)
+            .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Todo Not Found"));
+
+        return ResponseEntity.ok(exisitingTodo);
+
+    }
+
     public ResponseEntity<Todo> updateTodo(int userid, int todoid, Todo todo){
 
         User user = usersRepository.findById(userid)

@@ -46,6 +46,16 @@ export const deleteTodoForUser
 ///users/{id}/todos
 
 
+///users/{userid}/todos/{todoid}
+export const retrieveSpecificTodoForUser 
+    = (userid, todoid) => apiClientWithAuth.get(`/users/${userid}/todos/${todoid}`)
 
+
+export const updateTodoForUser 
+    = (userid, todoid, todo) => apiClientWithAuth.put(`/users/${userid}/todos/${todoid}`, todo)
+
+//"/users/{id}/todos"
+export const createTodoForUser 
+= (userid, todo) => apiClientWithAuth.post(`/users/${userid}/todos`, todo)
 
 export default  apiClientWithAuth

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import {retrieveAllTodoForUser, deleteTodoForUser} from '../BasicComponents/Api'
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { useAuth } from "../BasicComponents/AuthProvider"
 
 
@@ -18,6 +18,8 @@ export default function TodoComponent(){
     const [errorMessage, setErrorMessage] = useState(false)
     
     const auth = useAuth()
+
+    const navigate = useNavigate()
 
     //userid = await auth.getUserid(username)
 
@@ -70,6 +72,16 @@ export default function TodoComponent(){
 
     }
     
+    function updateTodo(todoid){
+        navigate(`/todo/${todoid}`)
+
+
+    }
+
+    // if todo id is -1, create new todo
+    function createNewTodo(){
+        navigate(`/todo/-1`)
+    }
 
     
 
@@ -101,6 +113,7 @@ export default function TodoComponent(){
                             <td>{todo.targetdate}</td>
                             <td>{todo.done == 1 ? "yes" : "No"}</td>
                             <td><button onClick={()=>deleteTodo(todo.id)}>Delete todo</button></td>
+                            <td><button onClick={() => updateTodo(todo.id)}>Update Todo</button></td>
                         </tr>
                         
                     )
@@ -112,6 +125,8 @@ export default function TodoComponent(){
             
 
         </table>
+
+        <button type="button" onClick={createNewTodo}>Create New Todo</button>
 
         </div>
         
