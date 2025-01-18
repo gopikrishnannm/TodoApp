@@ -26,7 +26,7 @@ export default function TodoApp(){
             <AuthProvider>
 
             <BrowserRouter>
-            {/* <HeaderComponent/> */}
+            {<HeaderComponent/> }
             <Routes>
 
                 <Route path="/" element={<LoginComponent/>}/>

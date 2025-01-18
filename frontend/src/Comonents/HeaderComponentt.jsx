@@ -1,13 +1,54 @@
 import { useContext } from "react"
 import { AuthContext, useAuth } from "../BasicComponents/AuthProvider"
+import { Link, useLocation } from "react-router-dom"
+
 function HeaderComponent() {
 
     const authContext = useAuth()
+    
+    const isAuthenticated = authContext.authenticated
 
-    console.log(authContext.number+10)
+    function logout(){
+        authContext.logout()
+    }
+
+    const location = useLocation()
+
+    const username = localStorage.getItem("username")
+
+    
     return (
-        
-        <div></div>
+
+        <div>
+
+
+
+        <div>
+             {isAuthenticated && <div>Todo App</div>}
+
+        </div>
+
+        <div>
+            {location.pathname.startsWith(`/welcome/`) && <Link to={`/${username}/todo`}>Todo Page</Link>}
+        </div>
+
+        <div>
+            {location.pathname.startsWith(`/${username}/todo`) && <Link to={`/welcome/${username}`}>Home Page</Link>}
+        </div>
+        <div>
+        {location.pathname.startsWith(`/todo`) && <Link to={`/welcome/${username}`}>Home Page</Link>}
+        </div>
+
+        <div>
+        {location.pathname.startsWith(`/todo`) && <Link to={`/${username}/todo`}>Todo Page</Link>}
+        </div>
+        <div>
+            {isAuthenticated && <div><button onClick={logout}>Logout</button></div>}
+        </div>  
+
+        </div>
+
+       
     )
 }
 

@@ -22,10 +22,12 @@ export default function AuthProvider({children}){
             const response = await loginUser(username,password)
             
             if(response){
-                const { jwt : token, id : userid, username } = response.data; 
+                console.log("response data is ", response.data)
+                const { jwt : token, id : userid, username : username } = response.data; 
                 console.log("Token recieved",token)
                 localStorage.setItem("token", token)
                 localStorage.setItem("userid", userid)
+                localStorage.setItem("username", username)
                 console.log("user id in set item is ", userid)
                 setAuthenticated(true)
                 return true
