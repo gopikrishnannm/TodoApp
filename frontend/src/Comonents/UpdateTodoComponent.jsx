@@ -29,7 +29,8 @@ export default function UpdateTodoComponent(){
 
         console.log("userid is ,", userid)
         console.log("todoid is ", todoid)
-        retrieveSpecificTodoForUser(userid, todoid)
+        if(todoid!=-1){
+            retrieveSpecificTodoForUser(userid, todoid)
         .then(
             (response) => 
                 {
@@ -40,6 +41,9 @@ export default function UpdateTodoComponent(){
                 }
         )
         .catch((error)=> console.log(error))
+
+        }
+        
     }
 
     function onSubmit(values){
