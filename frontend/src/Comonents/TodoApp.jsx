@@ -6,6 +6,7 @@ import TodoComponent from "./TodoComponent";
 import HeaderComponent from './HeaderComponentt'
 import AuthProvider, { useAuth } from "../BasicComponents/AuthProvider";
 import UpdateTodoComponent from "./UpdateTodoComponent";
+import RegisterComponent from "./RegisterComponent";
 
 
 function AuthenticatedRoute({children}){
@@ -30,6 +31,7 @@ export default function TodoApp(){
             <Routes>
 
                 <Route path="/" element={<LoginComponent/>}/>
+                <Route path="/register" element={<RegisterComponent/>}/>
                 <Route path="/welcome/:username" element={
                     
                     <AuthenticatedRoute>

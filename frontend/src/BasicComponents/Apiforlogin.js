@@ -28,6 +28,13 @@ export const loginUser = async (username, password) => {
 };
 
 
+//@GetMapping("/userexits/{username}")
+export const isUserExist
+    = (username) =>  apiClient.get(`/userexists/${username}`)
+
+//@PostMapping("/register")
+export const register
+    = (user) => apiClient.post(`/register`, user)
 
 // export function retrieveAllTodoForUser(id){
 //     apiClient.get(`/users/${id}/todos`)

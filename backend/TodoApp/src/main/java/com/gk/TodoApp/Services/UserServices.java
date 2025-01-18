@@ -42,6 +42,11 @@ public class UserServices {
 
     }
 
+    public boolean isUserExist(String username){
+        User user = usersRepository.findByUsername(username);
+        return user!=null;
+    }
+
     public User register(User user) {
 
         user.setPassword(passwordEncoder.encode(user.getPassword()));

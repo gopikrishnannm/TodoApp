@@ -29,6 +29,10 @@ export default function LoginComponent(){
         }
     }
 
+    function register(){
+        navigate(`/register`)
+    }
+
 
 
     return(
@@ -37,6 +41,7 @@ export default function LoginComponent(){
             <input type="text" onChange={(event) => (setUsername(event.target.value))}/>
             <input type="password" onChange={(event) => (setPassword(event.target.value))}/>
             <input type="button" value="login"  onClick={verifyCredenials}/>
+            <input type="button" value="register" onClick={register}/>
         </div>
 
     )
