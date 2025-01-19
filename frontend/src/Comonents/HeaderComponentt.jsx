@@ -6,7 +6,12 @@ function HeaderComponent() {
 
     const authContext = useAuth()
     
+    
     const isAuthenticated = authContext.authenticated
+
+    
+
+    
 
     function logout(){
         authContext.logout()
@@ -16,6 +21,8 @@ function HeaderComponent() {
 
     const username = localStorage.getItem("username")
 
+
+
     
     return (
 
@@ -24,7 +31,7 @@ function HeaderComponent() {
 
 
         <div>
-             {isAuthenticated && <div>Todo App</div>}
+             {isAuthenticated &&  location.pathname !== "/" && <div>Todo App</div>}
 
         </div>
 
@@ -43,7 +50,7 @@ function HeaderComponent() {
         {location.pathname.startsWith(`/todo`) && <Link to={`/${username}/todo`}>Todo Page</Link>}
         </div>
         <div>
-            {isAuthenticated && <div><button onClick={logout}>Logout</button></div>}
+            {isAuthenticated &&  location.pathname !== "/" && <div><button onClick={logout}>Logout</button></div>}
         </div>  
 
         </div>
