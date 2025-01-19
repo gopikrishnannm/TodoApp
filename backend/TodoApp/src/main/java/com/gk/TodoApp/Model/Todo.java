@@ -25,8 +25,6 @@ public class Todo {
 
     public Todo(){}
 
-    
-
     public Todo(String description, boolean done, LocalDate targetdate, User user) {
         this.description = description;
         this.done = done;

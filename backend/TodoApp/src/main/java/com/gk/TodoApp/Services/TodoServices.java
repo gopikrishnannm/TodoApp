@@ -74,11 +74,8 @@ public class TodoServices {
         User user = usersRepository.findById(userid)
         .orElseThrow(() -> new RuntimeException("User Not Found"));
 
-        boolean todoExits = todoRepository.existsByUserAndId(user, todoid);
-
         Todo exisitingTodo = todoRepository.findByUserAndId(user, todoid)
             .orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Todo Not Found"));
-
 
         exisitingTodo.setDescription(todo.getDescription());
         exisitingTodo.setTargetdate(todo.getTargetdate());

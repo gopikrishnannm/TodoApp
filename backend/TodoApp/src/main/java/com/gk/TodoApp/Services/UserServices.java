@@ -37,9 +37,7 @@ public class UserServices {
         if (user == null) {
             throw new RuntimeException("User Not Found");
         }
-        
         return user.getId();
-
     }
 
     public boolean isUserExist(String username){
@@ -48,7 +46,6 @@ public class UserServices {
     }
 
     public User register(User user) {
-
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return usersRepository.save(user);
     }
@@ -69,24 +66,22 @@ public class UserServices {
     }
 
     public ResponseEntity<?> verify(User user) {
-        
         // creating a authenticaion object and making it authenticated by checking it with 
         // UsernamePasswordAuthenticationToken that is delegating the task to authentication provider(dao)
         Authentication authentication =
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword()));
-        
-        // 
+            
         if(authentication.isAuthenticated()){
             // if authentication object is authenticated then generate jwt token
             User fullUserDetails = usersRepository.findByUsername(user.getUsername());
     
-    // Check if user exists and get the user ID
-    if (fullUserDetails != null) {
-        String jwt = jwtService.generateToken(user.getUsername());
-        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, fullUserDetails.getId(), user.getUsername()));
-    } else {
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
-    }
+            // Check if user exists and get the user ID
+            if (fullUserDetails != null) {
+                String jwt = jwtService.generateToken(user.getUsername());
+                return ResponseEntity.ok(new JwtAuthenticationResponse(jwt, fullUserDetails.getId(), user.getUsername()));
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+            }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Authenticaion failed"); 
     }

@@ -34,16 +34,16 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http)throws  Exception{
 
         return http.cors().and().
-                csrf(customizer -> customizer.disable())
-                .authorizeHttpRequests(request -> request.
-                requestMatchers("register","login","userexists/**")
-                .permitAll()
-                .anyRequest().authenticated())
-                //.formLogin(Customizer.withDefaults())
-                .httpBasic(Customizer.withDefaults())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+            csrf(customizer -> customizer.disable())
+            .authorizeHttpRequests(request -> request.
+            requestMatchers("register","login","userexists/**")
+            .permitAll()
+            .anyRequest().authenticated())
+            //.formLogin(Customizer.withDefaults())
+            .httpBasic(Customizer.withDefaults())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+            .build();
 
     }
 
