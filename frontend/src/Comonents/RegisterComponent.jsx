@@ -6,41 +6,26 @@ export default function RegisterComponent(){
     const [successMessage, setSuccessMessage] = useState(false)
     const [failureMessage, setFailureMessage] = useState(false)
 
-
     async function onSubmit(values){
-        console.log(values)
         const userExist = await isUserExist(values.username)
         if(userExist.data != true){
-
             const user = {
                 username : values.username,
                 password : values.password
             }
-
             register(user)
-            .then( (response) =>{
-
-                console.log(response)
-                setSuccessMessage(true)
-            }
-                
-            )
-            .catch((error) =>{
+            .then( () =>setSuccessMessage(true))
+            .catch(
+                (error) =>{
                 console.log(error)
                 setFailureMessage(true)
-            } 
-                
+                } 
             )
-
-            
-
         }
         else{
             setFailureMessage(true)
-
         }
     }
-
     function validate(values){
         const error = {}
         if(values.username.length<=4){
@@ -51,15 +36,12 @@ export default function RegisterComponent(){
         }
         return error
     }
-
     return(
-
-        
         <div>
             {successMessage && <div>New User Has Been Created !</div>}
             {failureMessage && <div>User With Same Username Already Exists!</div>}
             <Formik
-            
+
             initialValues={
                 {
                     username : "",
@@ -68,26 +50,16 @@ export default function RegisterComponent(){
                 }
             }
             onSubmit={onSubmit}
-
             validate={validate}
-
             validateOnChange={false}
             validateOnBlur={false}
-            
             >    
                 {
 
                     (props) =>(
                         <Form>
-                        
                             <ErrorMessage name="username" component="div"/>
-
-                                
-                            
                             <ErrorMessage name="password" component="div"/>
-                        
-                        
-                        
                             <fieldset>
                                 <label htmlFor="username">Username</label>
                                 <Field type="text" name="username"/>
@@ -97,15 +69,10 @@ export default function RegisterComponent(){
                                 <Field type="password" name="password"/>    
                             </fieldset>
                             <button type="submit">Register</button>
-
-
                         </Form>
                     )
 
                 }
-
-                
-
             </Formik>
         </div>
     )

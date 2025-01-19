@@ -10,22 +10,4 @@ public class TodoAppApplication {
 		SpringApplication.run(TodoAppApplication.class, args);
 	}
 
-	// @Bean
-	// public WebMvcConfigurer corsConfigurer(){
-	// 	return new WebMvcConfigurer(){
-	// 		@Override
-	// 		public void addCorsMappings(CorsRegistry registry){
-	// 			registry.addMapping("/**")
-	// 			.allowedMethods("*")
-	// 			.allowedOrigins( "http://localhost:3000")
-	// 			.allowedHeaders("*")
-	// 			.exposedHeaders("Authorization")
-	// 			.allowCredentials(true);
-
-	// 		}
-	// 	};
-	// }
-
-
-
 }

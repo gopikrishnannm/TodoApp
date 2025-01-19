@@ -2,28 +2,19 @@ import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
 import { useAuth } from "../BasicComponents/AuthProvider"
 
-
-
-
 export default function LoginComponent(){
 
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [errorMessage, setErrorMessage] = useState(false);
     const navigate = useNavigate();
-
     const authContext = useAuth();
      
-    
-    
-
     async function verifyCredenials(){
-
         const isAuthenticated = await authContext.login(username, password)
         if(isAuthenticated){
             navigate(`/welcome/${username}`)
         }
-
         else{
             setErrorMessage(true)
         }
@@ -33,8 +24,6 @@ export default function LoginComponent(){
         navigate(`/register`)
     }
 
-
-
     return(
         <div className="container">
             { errorMessage && <div> Please check Your credentials </div>}
@@ -43,6 +32,5 @@ export default function LoginComponent(){
             <input type="button" value="login"  onClick={verifyCredenials}/>
             <input type="button" value="register" onClick={register}/>
         </div>
-
     )
 }

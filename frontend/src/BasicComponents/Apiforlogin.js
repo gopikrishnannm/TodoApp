@@ -4,15 +4,9 @@ const apiClient = axios.create(
     {
         baseURL : 'http://localhost:8080'
     }
-
 )
 
-
-
-
-
 export const loginUser = async (username, password) => {
-
     const user = {username,password}
     try{ 
         const response = await apiClient.post('/login', user);
@@ -23,8 +17,6 @@ export const loginUser = async (username, password) => {
 
         throw error;
     }
-
-
 };
 
 
@@ -36,8 +28,3 @@ export const isUserExist
 export const register
     = (user) => apiClient.post(`/register`, user)
 
-// export function retrieveAllTodoForUser(id){
-//     apiClient.get(`/users/${id}/todos`)
-// }
-
-///http://localhost:8080/users/1/todos

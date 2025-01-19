@@ -2,7 +2,7 @@ export default function ErrorComponent(){
     return (
         <div>
             <div>
-                404
+                No Page Found!
             </div>
         </div>
     )

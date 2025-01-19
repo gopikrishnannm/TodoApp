@@ -9,15 +9,13 @@ import UpdateTodoComponent from "./UpdateTodoComponent";
 import RegisterComponent from "./RegisterComponent";
 import DeleteUserComponent from "./DeleteUserComponent";
 
-
 function AuthenticatedRoute({children}){
-    
+
     const authContext = useAuth()
     if(authContext.authenticated){
         return children
     }
     return <Navigate to = "/"/>
-    
 }
 
 
@@ -27,51 +25,39 @@ export default function TodoApp(){
 
             <AuthProvider>
 
-            <BrowserRouter>
-            {<HeaderComponent/> }
-            <Routes>
+                <BrowserRouter>
+                    {<HeaderComponent/> }
+                    <Routes>
+                        <Route path="/" element={<LoginComponent/>}/>
+                        <Route path="/register" element={<RegisterComponent/>}/>
 
-                <Route path="/" element={<LoginComponent/>}/>
-                <Route path="/register" element={<RegisterComponent/>}/>
-                <Route path="/welcome/:username" element={
-                    
-                    <AuthenticatedRoute>
-                        <WelcomeComponent/>
-                    </AuthenticatedRoute>
+                        <Route path="/welcome/:username" element={
+                            <AuthenticatedRoute>
+                                <WelcomeComponent/>
+                            </AuthenticatedRoute>
+                        }/>
 
-                    
-                    
-                    }/>
+                        <Route path="/deleteuser/:username" element={
+                            <AuthenticatedRoute>
+                                <DeleteUserComponent/>
+                            </AuthenticatedRoute>
+                        }/>
+                        <Route path="/:username/todo" element={
+                            <AuthenticatedRoute>
+                                <TodoComponent/>
+                            </AuthenticatedRoute>   
+                        }/>
 
-                <Route path="/deleteuser/:username" element={
-                    <AuthenticatedRoute>
-                        <DeleteUserComponent/>
-                    </AuthenticatedRoute>
-                }></Route>
-                <Route path="/:username/todo" element={
-                    <AuthenticatedRoute>
-                        <TodoComponent/>
-                    </AuthenticatedRoute>
-                    
-                    
-                    }/>
+                        <Route path="/todo/:todoid" element={
+                            <AuthenticatedRoute>
+                            <UpdateTodoComponent/>
+                            </AuthenticatedRoute>
+                        }/>
+                        <Route path="*" element={<ErrorComponent/>}/>
+                        <Route path="/header" element={<HeaderComponent/>}/>
+                    </Routes>
 
-                <Route path="/todo/:todoid" element={
-                    <AuthenticatedRoute>
-                    <UpdateTodoComponent/>
-                </AuthenticatedRoute>
-
-                }/>
-                <Route path="*" element={<ErrorComponent/>}/>
-                <Route path="/header" element={<HeaderComponent/>}/>
-            
-                
-
-
-
-            </Routes>
-
-            </BrowserRouter>
+                </BrowserRouter>
 
             </AuthProvider>
 

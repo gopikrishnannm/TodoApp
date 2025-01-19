@@ -4,20 +4,13 @@ import { deleteUser } from "../BasicComponents/Api";
 import { useState } from "react";
 export default function DeleteUserComponent(){
 
-
     const navigate = useNavigate()
-
     const [errorMessage, setErrorMessage] = useState(false)
-
     const {username} = useParams()
-
 
     function onSubmit(values){
 
-        console.log(username)
-
         if(username == values.username){
-
             deleteUser(values.username)
             .then(() =>
                 navigate(`/`)
@@ -25,32 +18,23 @@ export default function DeleteUserComponent(){
             .catch(
                 setErrorMessage(true)
             )
-
         }
         else{
             setErrorMessage(true)
         }
         
-
-        
     }
-
-
-
-
     return(
-
         <div>
             <h2>Delete User!</h2>
+            {errorMessage && <div>Enter your correct Username</div>}
 
-            {errorMessage && <div>User with the given username is not availble</div>}
             <Formik
-            
+
             initialValues={
                 {username:""}
             }
             onSubmit={onSubmit}
-            
             >
                 {
                     (props) => (

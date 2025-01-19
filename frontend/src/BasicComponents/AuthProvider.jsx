@@ -11,16 +11,11 @@ export const useAuth = () => useContext(AuthContext)
 export default function AuthProvider({children}){
 
     const [authenticated, setAuthenticated] = useState(false);
-
-    // const [userid, setUserid] = useState(10)
-
-
+    
     async function login(username, password){   
 
-
         try{
-            const response = await loginUser(username,password)
-            
+            const response = await loginUser(username,password)       
             if(response){
                 console.log("response data is ", response.data)
                 const { jwt : token, id : userid, username : username } = response.data; 
@@ -37,7 +32,6 @@ export default function AuthProvider({children}){
                 return false
             }
         }
-
         catch(error){
             console.error('Login failed:', error.response || error.message);
             setAuthenticated(false);
@@ -45,28 +39,14 @@ export default function AuthProvider({children}){
         }
     }
 
-
     function logout(){
         localStorage.removeItem('token');
         setAuthenticated(false);
     }
 
-    // async function getUserid(username){
-    //         const userid = await retrieveIdByUsername(username)
-    //         return userid
-    //  }
-
-
     return(
-
         <AuthContext.Provider value={{authenticated, setAuthenticated, login, logout}}>
             {children}
         </AuthContext.Provider>
-
-
     )
-
-    
-
-
 }

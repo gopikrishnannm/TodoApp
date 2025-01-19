@@ -7,17 +7,11 @@ import moment from 'moment'
 
 export default function UpdateTodoComponent(){
 
-    const navaigate = useNavigate()
-
     const {todoid} = useParams()
-
     const userid = localStorage.getItem("userid")
-
     const [description, setDescription] = useState('')
     const [targetdate, setTargetDate] = useState('')
     const [done, setdone] = useState(false)
-
-
     const [updateSuccessMessage, setUpdateSuccessMessage] = useState(false)
     const [newTodoSuccessMessage, setNewTodoSuccessMessage] = useState(false)
 
@@ -27,105 +21,75 @@ export default function UpdateTodoComponent(){
 
     function retrieveSpecificTodo(){
 
-        console.log("userid is ,", userid)
-        console.log("todoid is ", todoid)
         if(todoid!=-1){
             retrieveSpecificTodoForUser(userid, todoid)
-        .then(
-            (response) => 
-                {
-                    setDescription(response.data.description)
-                    setTargetDate(response.data.targetdate)
-                    setdone(response.data.done)
-                    
-                }
-        )
-        .catch((error)=> console.log(error))
-
+            .then(
+                (response) => 
+                    {
+                        setDescription(response.data.description)
+                        setTargetDate(response.data.targetdate)
+                        setdone(response.data.done)
+                        
+                    }
+            )
+            .catch((error)=> console.log(error))
         }
-        
     }
 
     function onSubmit(values){
         const userid = localStorage.getItem("userid")
-        console.log("value  of is done is ", values.done)
         const todo = {
             "description" : values.description,
             "targetdate" : values.targetdate,
             "done" : values.done === "true"
         }
-
         if(todoid!=-1){
-        console.log(todo)
-        updateTodoForUser(userid,todoid, todo)
-        .then((response)=> {
-            setUpdateSuccessMessage(true)
-        })
-        .catch((error) => console.log(error))
+            console.log(todo)
+            updateTodoForUser(userid,todoid, todo)
+            .then((response)=> {
+                setUpdateSuccessMessage(true)
+            })
+            .catch((error) => console.log(error))
 
         }
         // create  new todo
         else{
-
             createTodoForUser(userid, todo)
-            .then(
-                setNewTodoSuccessMessage(true)
-
-            )
+            .then(setNewTodoSuccessMessage(true))
             .catch((error) => console.log(error))
-
         }
-        
     }
 
     function validate(values){
-        const error = {
-            // description : "error in description",
-            // targetdate : "error in target date"
-        }
-
+        const error = {}
         if(values.description.length < 5){
             error.description= "enter description with more  4 characters "
         }
         if(values.targetdate.length == "" || values.targetdate.length == "" || !moment(values.targetdate).isValid()){
             error.targetdate= "enter valid targetdate"
         }
-        // console.log(values)
-        console.log(error)
         return error
     }
 
-
- 
- 
     return(
         <div>
             {updateSuccessMessage && <div>Todo has been updated</div>}
             {newTodoSuccessMessage && <div>New Todo has been created</div>}
-            <Formik initialValues={{description, targetdate, done}}
+            <Formik 
+                initialValues={{description, targetdate, done}}
                 enableReinitialize = {true}
                 onSubmit={onSubmit}
                 validate={validate}
                 validateOnChange={false}
                 validateOnBlur={false}
             > 
-
                 {
                     (props) => (
-                        <Form  >
-                            <ErrorMessage
-                            
-                            name="description"
-                            component="div"
+                        <Form>
 
+                            <ErrorMessage name="description" component="div"/>
+                            <ErrorMessage name="targetdate" />
 
-                            />
-                            <ErrorMessage
-                            
-                            name="targetdate"
-
-
-                            />
                             <fieldset>
                                 <label>Description</label>
                                 <Field type="text" name="description"/>
@@ -146,14 +110,8 @@ export default function UpdateTodoComponent(){
                             </div>
                         </Form>
                     )
-
                 }
-
-
-
             </Formik>
         </div>
     )
-    
-
 }

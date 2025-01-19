@@ -5,57 +5,43 @@ import { Link, useLocation } from "react-router-dom"
 function HeaderComponent() {
 
     const authContext = useAuth()
-    
-    
     const isAuthenticated = authContext.authenticated
-
-    
-
-    
+    const location = useLocation()
+    const username = localStorage.getItem("username")
 
     function logout(){
         authContext.logout()
     }
-
-    const location = useLocation()
-
-    const username = localStorage.getItem("username")
-
-
-
     
     return (
 
         <div>
 
+            <div>
+                {isAuthenticated &&  location.pathname !== "/" && <div>Todo App</div>}
+            </div>
 
+            <div>
+                {location.pathname.startsWith(`/welcome/`) && <Link to={`/${username}/todo`}>Todo Page</Link>}
+            </div>
 
-        <div>
-             {isAuthenticated &&  location.pathname !== "/" && <div>Todo App</div>}
+            <div>
+                {location.pathname.startsWith(`/${username}/todo`) && <Link to={`/welcome/${username}`}>Home Page</Link>}
+            </div>
+
+            <div>
+                {(location.pathname.startsWith(`/todo`) || location.pathname.startsWith(`/deleteuser`) ) && <Link to={`/welcome/${username}`}>Home Page</Link>}
+            </div>
+
+            <div>
+                {(location.pathname.startsWith(`/todo`) || location.pathname.startsWith(`/deleteuser`) )&& <Link to={`/${username}/todo`}>Todo Page</Link>}
+            </div>
+
+            <div>
+                {isAuthenticated &&  location.pathname !== "/" && <div><button onClick={logout}>Logout</button></div>}
+            </div>  
 
         </div>
-
-        <div>
-            {location.pathname.startsWith(`/welcome/`) && <Link to={`/${username}/todo`}>Todo Page</Link>}
-        </div>
-
-        <div>
-            {location.pathname.startsWith(`/${username}/todo`) && <Link to={`/welcome/${username}`}>Home Page</Link>}
-        </div>
-        <div>
-        {(location.pathname.startsWith(`/todo`) || location.pathname.startsWith(`/deleteuser`) ) && <Link to={`/welcome/${username}`}>Home Page</Link>}
-        </div>
-
-        <div>
-        {(location.pathname.startsWith(`/todo`) || location.pathname.startsWith(`/deleteuser`) )&& <Link to={`/${username}/todo`}>Todo Page</Link>}
-        </div>
-        <div>
-            {isAuthenticated &&  location.pathname !== "/" && <div><button onClick={logout}>Logout</button></div>}
-        </div>  
-
-        </div>
-
-       
     )
 }
 
