@@ -17,6 +17,10 @@ export default function WelcomeComponent(){
                 <button> Goto Todo management</button>
 
             </Link>
+
+            <Link to={`/deleteuser/${username}`}>
+            <button>Delete User</button>
+            </Link>
         </div>
 
         

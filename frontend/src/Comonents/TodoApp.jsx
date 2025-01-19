@@ -7,6 +7,7 @@ import HeaderComponent from './HeaderComponentt'
 import AuthProvider, { useAuth } from "../BasicComponents/AuthProvider";
 import UpdateTodoComponent from "./UpdateTodoComponent";
 import RegisterComponent from "./RegisterComponent";
+import DeleteUserComponent from "./DeleteUserComponent";
 
 
 function AuthenticatedRoute({children}){
@@ -41,6 +42,12 @@ export default function TodoApp(){
                     
                     
                     }/>
+
+                <Route path="/deleteuser/:username" element={
+                    <AuthenticatedRoute>
+                        <DeleteUserComponent/>
+                    </AuthenticatedRoute>
+                }></Route>
                 <Route path="/:username/todo" element={
                     <AuthenticatedRoute>
                         <TodoComponent/>

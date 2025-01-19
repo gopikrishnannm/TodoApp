@@ -58,4 +58,8 @@ export const updateTodoForUser
 export const createTodoForUser 
 = (userid, todo) => apiClientWithAuth.post(`/users/${userid}/todos`, todo)
 
+//@PostMapping("/deleteUser/{username}")
+export const deleteUser 
+    = (username) => apiClientWithAuth.post(`/deleteUser/${username}`)
+
 export default  apiClientWithAuth

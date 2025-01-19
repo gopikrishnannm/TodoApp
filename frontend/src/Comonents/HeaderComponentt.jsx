@@ -43,11 +43,11 @@ function HeaderComponent() {
             {location.pathname.startsWith(`/${username}/todo`) && <Link to={`/welcome/${username}`}>Home Page</Link>}
         </div>
         <div>
-        {location.pathname.startsWith(`/todo`) && <Link to={`/welcome/${username}`}>Home Page</Link>}
+        {(location.pathname.startsWith(`/todo`) || location.pathname.startsWith(`/deleteuser`) ) && <Link to={`/welcome/${username}`}>Home Page</Link>}
         </div>
 
         <div>
-        {location.pathname.startsWith(`/todo`) && <Link to={`/${username}/todo`}>Todo Page</Link>}
+        {(location.pathname.startsWith(`/todo`) || location.pathname.startsWith(`/deleteuser`) )&& <Link to={`/${username}/todo`}>Todo Page</Link>}
         </div>
         <div>
             {isAuthenticated &&  location.pathname !== "/" && <div><button onClick={logout}>Logout</button></div>}

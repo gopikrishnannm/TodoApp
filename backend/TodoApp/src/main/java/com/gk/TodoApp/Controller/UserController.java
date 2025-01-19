@@ -47,4 +47,9 @@ public class UserController {
         return services.isUserExist(username);
     }
 
+    @PostMapping("/deleteUser/{username}")
+    public ResponseEntity<?> deleteUser(@PathVariable String username){
+        return services.deleteUser(username);
+    }
+
 }

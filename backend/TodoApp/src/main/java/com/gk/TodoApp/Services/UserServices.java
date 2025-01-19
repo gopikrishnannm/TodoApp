@@ -53,6 +53,17 @@ public class UserServices {
         return usersRepository.save(user);
     }
 
+    public ResponseEntity<?> deleteUser(String username){
+        User user = usersRepository.findByUsername(username);
+        if(user!=null){
+            usersRepository.deleteById(user.getId());
+            return ResponseEntity.ok("User deleted successfully");
+        }
+        else{
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        }
+    }
+
     public List<User> returnUsers(){
         return usersRepository.findAll();
     }
