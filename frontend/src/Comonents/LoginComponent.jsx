@@ -1,6 +1,8 @@
 import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
 import { useAuth } from "../BasicComponents/AuthProvider"
+import '../Css/StyleLoginComponent.css';
+
 
 export default function LoginComponent(){
 
@@ -26,11 +28,18 @@ export default function LoginComponent(){
 
     return(
         <div className="container">
-            { errorMessage && <div> Please check Your credentials </div>}
-            <input type="text" onChange={(event) => (setUsername(event.target.value))}/>
-            <input type="password" onChange={(event) => (setPassword(event.target.value))}/>
-            <input type="button" value="login"  onClick={verifyCredenials}/>
-            <input type="button" value="register" onClick={register}/>
+            { errorMessage && <div className="error-message"> Invalid username or password. Please try again. </div>}
+            <div className="input-container">
+                <input type="text" id="username" placeholder="username" className="input-field" 
+                    onChange={(event) => (setUsername(event.target.value))}/>
+                <input type="password" id="password" placeholder="password" className="input-field" 
+                    onChange={(event) => (setPassword(event.target.value))}/>
+            </div>
+            <div className="button-container">
+                <input type="button" id="register-button" className="button" value="register" onClick={register}/>
+                <input type="button" id="login-button" className="button" value="login"  onClick={verifyCredenials}/>
+            </div>
+            
         </div>
     )
 }

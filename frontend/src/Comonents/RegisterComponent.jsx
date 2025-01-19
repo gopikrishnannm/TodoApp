@@ -1,6 +1,9 @@
 import { Formik, fieldset, Field, Form, ErrorMessage} from "formik"
 import { isUserExist, register } from "../BasicComponents/Apiforlogin"
 import { useState } from "react"
+
+import '../Css/StyleRegisterComponent.css'
+
 export default function RegisterComponent(){
 
     const [successMessage, setSuccessMessage] = useState(false)
