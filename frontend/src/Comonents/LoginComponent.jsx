@@ -2,6 +2,7 @@ import { useState } from "react"
 import {useNavigate} from 'react-router-dom'
 import { useAuth } from "../BasicComponents/AuthProvider"
 import '../Css/StyleLoginComponent.css';
+import '../Css/Common.css';
 
 
 export default function LoginComponent(){
@@ -28,7 +29,10 @@ export default function LoginComponent(){
 
     return(
         <div className="container">
-            { errorMessage && <div className="error-message"> Invalid username or password. Please try again. </div>}
+            <div className="title">
+                <h1>Welcome to the Todo App!</h1>
+            </div>
+            { errorMessage && <div className="failure-message"> Invalid username or password. Please try again. </div>}
             <div className="input-container">
                 <input type="text" id="username" placeholder="username" className="input-field" 
                     onChange={(event) => (setUsername(event.target.value))}/>

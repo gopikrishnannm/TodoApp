@@ -1,4 +1,5 @@
 import { Link, useParams } from "react-router-dom"
+import '../Css/Common.css';
 
 export default function WelcomeComponent(){
 
