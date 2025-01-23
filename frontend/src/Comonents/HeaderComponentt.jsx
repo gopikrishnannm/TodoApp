@@ -1,6 +1,7 @@
 import { useContext } from "react"
 import { AuthContext, useAuth } from "../BasicComponents/AuthProvider"
 import { Link, useLocation } from "react-router-dom"
+import '../Css/StyleWelcomeComponent.css'
 
 function HeaderComponent() {
 
@@ -15,7 +16,7 @@ function HeaderComponent() {
     
     return (
 
-        <div>
+        <div className="header">
 
             <div>
                 {isAuthenticated &&  location.pathname !== "/" && <div>Todo App</div>}

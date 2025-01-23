@@ -2,6 +2,8 @@ import { Formik, Form, Field } from "formik";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { deleteUser } from "../BasicComponents/Api";
 import { useState } from "react";
+import '../Css/StyleDeleteComponent.css'
+
 export default function DeleteUserComponent(){
 
     const navigate = useNavigate()
@@ -15,22 +17,26 @@ export default function DeleteUserComponent(){
             .then(() =>
                 navigate(`/`)
             )
-            .catch(
+            .catch(()=> {
                 setErrorMessage(true)
-            )
+                setTimeout(()=>setErrorMessage(false), 3000)
+                }  
+            )   
         }
         else{
             setErrorMessage(true)
+            setTimeout(()=>setErrorMessage(false), 3000)
         }
         
     }
     return(
-        <div>
-            <h2>Delete User!</h2>
-            {errorMessage && <div>Enter your correct Username</div>}
-
+        <div className="delete-container">
+            <div className="delete-title">
+                <h2>Account Deletion</h2>
+                <p>Please enter your username to proceed with account deletion.</p>
+            </div>
+            {errorMessage && <div className="error-message ">Please enter the correct username</div>}
             <Formik
-
             initialValues={
                 {username:""}
             }
@@ -38,12 +44,11 @@ export default function DeleteUserComponent(){
             >
                 {
                     (props) => (
-                        <Form>
+                        <Form className="delete-form">
                             <fieldset>
-                                <label htmlFor="username"/>
-                                <Field type="text" name="username"/>
+                                <Field type="text" name="username"  className="input-field" placeholder="username"/>
                             </fieldset>
-                            <button type="submit">Delete</button>
+                            <button className="delete-button" type="submit">Delete</button>
 
                         </Form>
                     )
