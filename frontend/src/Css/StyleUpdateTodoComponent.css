@@ -1,3 +1,70 @@
+.update-todo-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: #FBFBFB;
+    margin-top: 30px;  
+        
+}
+
+.update-table {
+  width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.update-table th, .update-table td {
+  padding: 8px;
+  text-align: center;
+}
+
+.update-table th {
+  font-weight: bold;
+}
+
+
+.update-todo-container button {
+    padding: 15px;
+    background-color: #e7e7e7; 
+    color: #000; 
+    border: 1px solid #ccc;
+    border-radius: 25px; 
+    font-size: 13px;
+    text-align: center;
+  }
+
+.update-table button:hover {
+  opacity: 0.9;
+  background-color: #d5d5d5;
+}
+
+.update-todo-button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.input-field {
+    width: 300px; 
+    padding: 10px;
+    padding-left: 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    background-color: #e7e7e7; 
+    color: #000;
+    text-align: left; 
+    margin-top: 10px;
+  }
+
+.set-description{
+    border-collapse: collapse;
+    border-radius: 25px;
+}
+
 .success-message {
     color: green; 
     font-size: 14px;
@@ -13,3 +80,9 @@
     text-align: center;
     margin-bottom: 15px;
 }
+
+.todo-title{
+    position: absolute;
+    top: 22%;
+    font-size: large;
+  }

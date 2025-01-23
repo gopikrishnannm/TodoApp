@@ -78,7 +78,9 @@ export default function UpdateTodoComponent(){
     }
 
     return(
-        <div className="update-todo">
+        <div className="update-todo-container">
+            {todoid!=-1 && <div className="todo-title"> <h1>Update Your Existing Todo</h1></div>}
+            {todoid == -1 && <div className="todo-title"> <h1>Create New Todo</h1></div>}
             {updateSuccessMessage && <div className="success-message">Your changes have been saved</div>}
             {newTodoSuccessMessage && <div className="success-message">New Todo created successfully!</div>}
             <Formik 
@@ -94,24 +96,41 @@ export default function UpdateTodoComponent(){
                         <Form>
 
                             <ErrorMessage name="description" className="error-message" component="div"/>
-                            <ErrorMessage name="targetdate" className="error-message"/>
+                            <ErrorMessage name="targetdate" className="error-message" component="div"/>
 
-                            <fieldset>
-                                <label>Description</label>
-                                <Field type="text" name="description"/>
-                            </fieldset>
-                            <fieldset>
-                                <label>TargetDate</label>
-                                <Field type="date" name="targetdate"/>
-                            </fieldset>
-                            <fieldset>
-                                <label>Done?</label>
-                                <Field as="select" name="done">
-                                    <option value="true">Yes</option>
-                                    <option value="false">No</option>
-                                </Field>
-                            </fieldset>
-                            <div>
+                            <table className="update-table">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                             Description
+                                        </th>
+                                        <th>
+                                            TargetDate
+                                        </th>
+                                        <th>
+                                            Done?
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <Field type="text" name="description" className="input-field"/>
+                                        </td>
+                                        <td>
+                                            <Field type="date" name="targetdate" className="input-field"/>
+                                        </td>
+                                        <td>
+                                        <Field as="select" name="done" className="input-field">
+                                            <option value="true">Yes</option>
+                                            <option value="false">No</option>
+                                        </Field>
+                                        </td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                            <div className="update-todo-button-container" >
                                 <button type="submit">Save</button>
                             </div>
                         </Form>

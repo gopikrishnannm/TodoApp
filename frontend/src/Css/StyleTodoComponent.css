@@ -48,3 +48,9 @@
     margin: 40px;
     font-size: 15px;
 }
+
+.todolist-title{
+    position: absolute;
+    top: 15%;
+    font-size: large;
+  }

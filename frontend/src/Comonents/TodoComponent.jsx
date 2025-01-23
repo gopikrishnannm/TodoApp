@@ -43,7 +43,7 @@ export default function TodoComponent(){
     }
     return(
         <div className="todo-container">
-
+            <div className="todolist-title"><h1>My To-Do List</h1></div>
             {successMessage && <div className="success-message">Todo item has been deleted</div>}
                 <table className="todo-table">
                 <thead>
