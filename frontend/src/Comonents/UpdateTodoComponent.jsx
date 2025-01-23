@@ -4,6 +4,8 @@ import { useEffect, useState } from "react"
 import {ErrorMessage, Field, Form, Formik, fieldset} from 'formik'
 import moment from 'moment'
 
+import '../Css/StyleUpdateTodoComponent.css';
+
 
 export default function UpdateTodoComponent(){
 
@@ -48,6 +50,7 @@ export default function UpdateTodoComponent(){
             updateTodoForUser(userid,todoid, todo)
             .then((response)=> {
                 setUpdateSuccessMessage(true)
+                setTimeout(()=>setUpdateSuccessMessage(false),3000)
             })
             .catch((error) => console.log(error))
 
@@ -55,7 +58,10 @@ export default function UpdateTodoComponent(){
         // create  new todo
         else{
             createTodoForUser(userid, todo)
-            .then(setNewTodoSuccessMessage(true))
+            .then(()=> {
+                setNewTodoSuccessMessage(true)
+                setTimeout(()=>setNewTodoSuccessMessage(false),3000)
+            })
             .catch((error) => console.log(error))
         }
     }
@@ -72,9 +78,9 @@ export default function UpdateTodoComponent(){
     }
 
     return(
-        <div>
-            {updateSuccessMessage && <div>Todo has been updated</div>}
-            {newTodoSuccessMessage && <div>New Todo has been created</div>}
+        <div className="update-todo">
+            {updateSuccessMessage && <div className="success-message">Your changes have been saved</div>}
+            {newTodoSuccessMessage && <div className="success-message">New Todo created successfully!</div>}
             <Formik 
                 initialValues={{description, targetdate, done}}
                 enableReinitialize = {true}
@@ -87,8 +93,8 @@ export default function UpdateTodoComponent(){
                     (props) => (
                         <Form>
 
-                            <ErrorMessage name="description" component="div"/>
-                            <ErrorMessage name="targetdate" />
+                            <ErrorMessage name="description" className="error-message" component="div"/>
+                            <ErrorMessage name="targetdate" className="error-message"/>
 
                             <fieldset>
                                 <label>Description</label>

@@ -2,11 +2,12 @@ import { useEffect, useState } from "react"
 import {retrieveAllTodoForUser, deleteTodoForUser} from '../BasicComponents/Api'
 import { useNavigate, useParams } from "react-router-dom"
 import { useAuth } from "../BasicComponents/AuthProvider"
+import '../Css/StyleTodoComponent.css'
 
 export default function TodoComponent(){
 
 
-    const [errorMessage, setErrorMessage] = useState(false)
+    const [successMessage, setSuccessMessage] = useState(false)
     const navigate = useNavigate()
     const [todos, setTodos] = useState([])
 
@@ -14,7 +15,6 @@ export default function TodoComponent(){
 
     function retrieveAllTodos(){
         const userid = localStorage.getItem("userid")
-        console.log("user id from todo component ", userid)
         retrieveAllTodoForUser(userid)
         .then((response)=>setTodos(response.data))
     .catch((error)=> console.log(error.message))
@@ -24,7 +24,10 @@ export default function TodoComponent(){
         const userid = localStorage.getItem("userid")
         deleteTodoForUser(userid, todoid)
         .then((respone)=> {
-            setErrorMessage(true)
+            setSuccessMessage(true)
+            setTimeout(() => {
+                setSuccessMessage(false)
+            }, 3000);
             retrieveAllTodos()
         })
         .catch((error)=> console.log(error))
@@ -39,10 +42,10 @@ export default function TodoComponent(){
         navigate(`/todo/-1`)
     }
     return(
-        <div>
+        <div className="todo-container">
 
-            {errorMessage && <div>Todo item has been deleted</div>}
-                <table>
+            {successMessage && <div className="success-message">Todo item has been deleted</div>}
+                <table className="todo-table">
                 <thead>
                     <tr>
                         <th>
@@ -54,6 +57,12 @@ export default function TodoComponent(){
                         <th>
                             Done
                         </th>
+                        <th>
+                            Delete Todo
+                        </th>
+                        <th>
+                            Update Todo
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,8 +73,8 @@ export default function TodoComponent(){
                                         <td>{todo.description}</td>
                                         <td>{todo.targetdate}</td>
                                         <td>{todo.done == 1 ? "yes" : "No"}</td>
-                                        <td><button onClick={()=>deleteTodo(todo.id)}>Delete todo</button></td>
-                                        <td><button onClick={() => updateTodo(todo.id)}>Update Todo</button></td>
+                                        <td><button onClick={()=>deleteTodo(todo.id)}>Delete</button></td>
+                                        <td><button onClick={() => updateTodo(todo.id)}>Update</button></td>
                                     </tr>
                                     
                                 )
@@ -75,7 +84,7 @@ export default function TodoComponent(){
 
                 </tbody>
             </table>
-            <button type="button" onClick={createNewTodo}>Create New Todo</button>
+            <button type="button" id="new-todo-button" onClick={createNewTodo}>Create New Todo</button>
         </div>
     )
 }
