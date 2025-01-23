@@ -1,7 +1,7 @@
 import { useContext } from "react"
 import { AuthContext, useAuth } from "../BasicComponents/AuthProvider"
 import { Link, useLocation } from "react-router-dom"
-import '../Css/StyleWelcomeComponent.css'
+import '../Css/StyleHeaderComponent.css'
 
 function HeaderComponent() {
 
@@ -18,28 +18,19 @@ function HeaderComponent() {
 
         <div className="header">
 
-            <div>
+            <div className="header-left">
                 {isAuthenticated &&  location.pathname !== "/" && <div>Todo App</div>}
             </div>
 
-            <div>
-                {location.pathname.startsWith(`/welcome/`) && <Link to={`/${username}/todo`}>Todo Page</Link>}
-            </div>
-
-            <div>
+            <div className="header-center">
+            {(location.pathname.startsWith(`/todo`) || location.pathname.startsWith(`/deleteuser`) ) && <Link to={`/welcome/${username}`}>Home Page</Link>}
                 {location.pathname.startsWith(`/${username}/todo`) && <Link to={`/welcome/${username}`}>Home Page</Link>}
-            </div>
-
-            <div>
-                {(location.pathname.startsWith(`/todo`) || location.pathname.startsWith(`/deleteuser`) ) && <Link to={`/welcome/${username}`}>Home Page</Link>}
-            </div>
-
-            <div>
+                {location.pathname.startsWith(`/welcome/`) && <Link to={`/${username}/todo`}>Todo Page</Link>}
                 {(location.pathname.startsWith(`/todo`) || location.pathname.startsWith(`/deleteuser`) )&& <Link to={`/${username}/todo`}>Todo Page</Link>}
             </div>
 
-            <div>
-                {isAuthenticated &&  location.pathname !== "/" && <div><button onClick={logout}>Logout</button></div>}
+            <div className="header-right">
+                {isAuthenticated &&  location.pathname !== "/" && <button  className="header-button" onClick={logout}>Logout</button>}
             </div>  
 
         </div>
