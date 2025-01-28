@@ -1,5 +1,5 @@
 import LoginComponent from "./LoginComponent";
-import {BrowserRouter, Route, Router, Routes, Navigate} from 'react-router-dom';
+import {BrowserRouter, Route, Router, Routes, Navigate, useLocation} from 'react-router-dom';
 import WelcomeComponent from "./WelcomeComponent";
 import ErrorComponent from "./ErrorComponent";
 import TodoComponent from "./TodoComponent";
@@ -18,6 +18,17 @@ function AuthenticatedRoute({children}){
     return <Navigate to = "/"/>
 }
 
+function AppHeader(){
+    const location = useLocation()
+    const hideHeaderPath=['/', '/register']
+
+    if(hideHeaderPath.includes(location.pathname)){
+        return null;
+    }
+    return <HeaderComponent/>
+
+}
+
 
 export default function TodoApp(){
     return(
@@ -26,7 +37,7 @@ export default function TodoApp(){
             <AuthProvider>
 
                 <BrowserRouter>
-                    {<HeaderComponent/> }
+                    <AppHeader/>
                     <Routes>
                         <Route path="/" element={<LoginComponent/>}/>
                         <Route path="/register" element={<RegisterComponent/>}/>

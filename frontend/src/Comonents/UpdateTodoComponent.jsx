@@ -115,10 +115,10 @@ export default function UpdateTodoComponent(){
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <Field type="text" name="description" className="input-field"/>
+                                            <Field type="text" name="description" className="update-input-field"/>
                                         </td>
                                         <td>
-                                            <Field type="date" name="targetdate" className="input-field"/>
+                                            <Field type="date" name="targetdate" className="update-input-field"/>
                                         </td>
                                         <td>
                                         <Field as="select" name="done" className="input-field">
